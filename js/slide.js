@@ -112,10 +112,12 @@ export class Slide {
 
   activePrevSlide() {
     if (this.index.prev !== undefined) this.changeSlide(this.index.prev);
+    else this.changeSlide(this.slideArray.length - 1);
   }
 
   activeNextSlide() {
     if (this.index.next !== undefined) this.changeSlide(this.index.next);
+    else this.changeSlide(0);
   }
 
   onResize() {
@@ -205,5 +207,50 @@ export default class SlideNav extends Slide {
   bindControlEvents() {
     this.eventControl = this.eventControl.bind(this);
     this.activeControlItem = this.activeControlItem.bind(this);
+    this.actionActiveAnimation = this.actionActiveAnimation.bind(this);
+  }
+
+  activeAnimation(activeAnime) {
+    this.buttonAtive = document.querySelector(activeAnime);
+    this.buttonAtive.addEventListener("click", this.actionActiveAnimation);
+  }
+
+  actionActiveAnimation() {
+    this.isAnimeActived = this.isAnimeActived ? false : true;
+    this.setStyleAnimation();
+    if (this.isAnimeActived) {
+      this.changeSlideAnimation();
+      this.interval = setInterval(() => this.changeSlideAnimation(), 2000);
+    } else if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
+  changeSlideAnimation() {
+    if (this.index.next === undefined) {
+      this.changeSlide(0);
+    } else {
+      this.activeNextSlide();
+    }
+  }
+
+  setStyleAnimation() {
+    if (this.isAnimeActived) {
+      this.nextElement.setAttribute("disabled", "");
+      this.nextElement.classList.add("opacityAnimation");
+      this.prevElement.setAttribute("disabled", "");
+      this.prevElement.classList.add("opacityAnimation");
+      this.control.classList.add("noClick");
+      this.control.classList.add("opacityAnimation");
+      this.buttonAtive.id = "pause";
+    } else {
+      this.nextElement.removeAttribute("disabled", "");
+      this.nextElement.classList.remove("opacityAnimation");
+      this.prevElement.removeAttribute("disabled", "");
+      this.prevElement.classList.remove("opacityAnimation");
+      this.control.classList.remove("noClick");
+      this.control.classList.remove("opacityAnimation");
+      this.buttonAtive.id = "play";
+    }
   }
 }

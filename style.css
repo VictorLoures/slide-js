@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 
 ul {
@@ -93,7 +94,7 @@ img {
 .arrow-nav {
   display: flex;
   justify-content: space-around;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .arrow-nav button {
@@ -108,4 +109,22 @@ img {
 
 .arrow-nav button.prev {
   transform: rotate(-180deg);
+}
+
+#play {
+  transition: 0.5s;
+  background: #fb5 url("img/play.svg") center center no-repeat !important;
+}
+
+#pause {
+  transition: 0.5s;
+  background: #fb5 url("img/pause.svg") center center no-repeat !important;
+}
+
+.noClick {
+  pointer-events: none;
+}
+
+.opacityAnimation {
+  opacity: 0.7;
 }
