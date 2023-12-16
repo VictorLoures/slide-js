@@ -112,12 +112,12 @@ img {
 }
 
 #play {
-  transition: 0.5s;
+  transition: 1s;
   background: #fb5 url("img/play.svg") center center no-repeat !important;
 }
 
 #pause {
-  transition: 0.5s;
+  transition: 1s;
   background: #fb5 url("img/pause.svg") center center no-repeat !important;
 }
 
